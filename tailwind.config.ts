@@ -86,6 +86,47 @@ export default {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-20px)" }
         },
+        "spin-slow": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" }
+        },
+        "pulse-glow": {
+          "0%, 100%": { 
+            boxShadow: "0 0 20px rgba(59, 130, 246, 0.5)",
+            opacity: "1"
+          },
+          "50%": { 
+            boxShadow: "0 0 40px rgba(59, 130, 246, 0.8)",
+            opacity: "0.8"
+          }
+        },
+        "slide-up": {
+          "0%": { transform: "translateY(100px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" }
+        },
+        "slide-down": {
+          "0%": { transform: "translateY(-100px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" }
+        },
+        "cyber-glitch": {
+          "0%, 100%": { transform: "translate(0)" },
+          "20%": { transform: "translate(-2px, 2px)" },
+          "40%": { transform: "translate(-2px, -2px)" },
+          "60%": { transform: "translate(2px, 2px)" },
+          "80%": { transform: "translate(2px, -2px)" }
+        },
+        "neon-flicker": {
+          "0%, 100%": { opacity: "1" },
+          "41%": { opacity: "1" },
+          "42%": { opacity: "0.8" },
+          "43%": { opacity: "1" },
+          "45%": { opacity: "0.9" },
+          "46%": { opacity: "1" }
+        },
+        "wave": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" }
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -95,6 +136,13 @@ export default {
         "scale-in": "scale-in 0.4s ease-out",
         "glow-pulse": "glow-pulse 2s ease-in-out infinite",
         "float": "float 3s ease-in-out infinite",
+        "spin-slow": "spin-slow 20s linear infinite",
+        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        "slide-up": "slide-up 0.6s ease-out",
+        "slide-down": "slide-down 0.6s ease-out",
+        "cyber-glitch": "cyber-glitch 0.3s ease-in-out",
+        "neon-flicker": "neon-flicker 3s linear infinite",
+        "wave": "wave 3s linear infinite",
       },
     },
   },

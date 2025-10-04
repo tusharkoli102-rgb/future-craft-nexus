@@ -8,6 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
+    /* Dark Mode (Default) */
     --background: 220 25% 8%;
     --foreground: 0 0% 98%;
 
@@ -38,18 +39,67 @@ All colors MUST be HSL.
 
     --radius: 1rem;
 
+    /* Cyberpunk Neon Colors */
+    --neon-cyan: 180 100% 50%;
+    --neon-magenta: 320 100% 50%;
+    --neon-yellow: 60 100% 50%;
+    --neon-green: 120 100% 50%;
+
     /* Custom gradient tokens */
     --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(280 80% 65%) 100%);
     --gradient-secondary: linear-gradient(135deg, hsl(280 80% 65%) 0%, hsl(180 70% 50%) 100%);
     --gradient-hero: linear-gradient(180deg, hsl(220 25% 8%) 0%, hsl(220 30% 12%) 100%);
+    --gradient-cosmic: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(280 80% 65%) 50%, hsl(180 70% 50%) 100%);
+    --gradient-neon: linear-gradient(90deg, hsl(180 100% 50%) 0%, hsl(280 80% 65%) 50%, hsl(320 100% 50%) 100%);
     
-    /* Glow effects */
+    /* Advanced Glow effects */
     --glow-primary: 0 0 20px hsl(217 91% 60% / 0.3);
     --glow-accent: 0 0 20px hsl(280 80% 65% / 0.3);
     --glow-secondary: 0 0 20px hsl(180 70% 50% / 0.3);
+    --glow-neon-strong: 0 0 30px hsl(180 100% 50% / 0.6), 0 0 60px hsl(180 100% 50% / 0.3);
+    --glow-neon-magenta: 0 0 30px hsl(320 100% 50% / 0.6), 0 0 60px hsl(320 100% 50% / 0.3);
+    --glow-cyber: 0 0 10px hsl(180 100% 50% / 0.5), 0 0 20px hsl(180 100% 50% / 0.3), 0 0 30px hsl(180 100% 50% / 0.2);
 
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .light {
+    /* Light Mode */
+    --background: 0 0% 98%;
+    --foreground: 220 25% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 10%;
+
+    --primary: 217 91% 50%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 180 70% 45%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 10% 40%;
+
+    --accent: 280 80% 55%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 13% 85%;
+    --input: 220 13% 85%;
+    --ring: 217 91% 50%;
+
+    /* Light mode gradients */
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 98%) 0%, hsl(220 30% 95%) 100%);
+    --glow-primary: 0 0 20px hsl(217 91% 50% / 0.2);
+    --glow-accent: 0 0 20px hsl(280 80% 55% / 0.2);
+    --glow-secondary: 0 0 20px hsl(180 70% 45% / 0.2);
   }
 }
 
@@ -72,6 +122,17 @@ All colors MUST be HSL.
     @apply bg-card/40 backdrop-blur-xl border border-border/50;
   }
 
+  .glass-strong {
+    @apply bg-card/60 backdrop-blur-2xl border border-border/80;
+  }
+
+  .cyber-grid {
+    background-image: 
+      linear-gradient(hsl(var(--primary) / 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
   .glow-primary {
     box-shadow: var(--glow-primary);
   }
@@ -84,8 +145,27 @@ All colors MUST be HSL.
     box-shadow: var(--glow-secondary);
   }
 
+  .glow-neon-strong {
+    box-shadow: var(--glow-neon-strong);
+  }
+
+  .glow-neon-magenta {
+    box-shadow: var(--glow-neon-magenta);
+  }
+
+  .glow-cyber {
+    box-shadow: var(--glow-cyber);
+  }
+
   .gradient-text {
     background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-cosmic-text {
+    background: var(--gradient-cosmic);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -101,5 +181,28 @@ All colors MUST be HSL.
 
   .gradient-hero {
     background: var(--gradient-hero);
+  }
+
+  .gradient-cosmic {
+    background: var(--gradient-cosmic);
+  }
+
+  .gradient-neon {
+    background: var(--gradient-neon);
+  }
+
+  .neon-border {
+    border: 1px solid hsl(var(--neon-cyan));
+    box-shadow: 
+      0 0 5px hsl(var(--neon-cyan) / 0.5),
+      inset 0 0 5px hsl(var(--neon-cyan) / 0.2);
+  }
+
+  .neon-text {
+    color: hsl(var(--neon-cyan));
+    text-shadow: 
+      0 0 10px hsl(var(--neon-cyan) / 0.8),
+      0 0 20px hsl(var(--neon-cyan) / 0.5),
+      0 0 30px hsl(var(--neon-cyan) / 0.3);
   }
 }
