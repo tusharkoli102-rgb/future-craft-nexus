@@ -45,6 +45,7 @@ export const ScrollScene = () => {
         dpr={[1, 2]}
       >
         <color attach="background" args={['#000011']} />
+        <fog attach="fog" args={['#000022', 5, 25]} />
         <HumanoidScene scrollProgress={scrollProgress} />
         
         <EffectComposer>

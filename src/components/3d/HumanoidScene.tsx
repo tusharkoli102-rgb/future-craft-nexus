@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Sphere, MeshDistortMaterial, Environment, PerspectiveCamera, Float } from '@react-three/drei';
 import * as THREE from 'three';
@@ -12,15 +12,17 @@ export const HumanoidScene = ({ scrollProgress }: HumanoidSceneProps) => {
   const particlesRef = useRef<THREE.Points>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera>(null);
 
-  // Generate particle positions
-  const particlePositions = useMemo(() => {
+  // Generate particle geometry
+  const particlesGeometry = useMemo(() => {
+    const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(500 * 3);
     for (let i = 0; i < 500; i++) {
       positions[i * 3] = (Math.random() - 0.5) * 20;
       positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
       positions[i * 3 + 2] = (Math.random() - 0.5) * 20;
     }
-    return positions;
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    return geometry;
   }, []);
 
   // Animate based on scroll
@@ -171,15 +173,7 @@ export const HumanoidScene = ({ scrollProgress }: HumanoidSceneProps) => {
       </mesh>
 
       {/* Floating particles */}
-      <points ref={particlesRef}>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            count={particlePositions.length / 3}
-            array={particlePositions}
-            itemSize={3}
-          />
-        </bufferGeometry>
+      <points ref={particlesRef} geometry={particlesGeometry}>
         <pointsMaterial
           size={0.05}
           color="#00ffff"
@@ -189,9 +183,6 @@ export const HumanoidScene = ({ scrollProgress }: HumanoidSceneProps) => {
           blending={THREE.AdditiveBlending}
         />
       </points>
-
-      {/* Background fog */}
-      <fog attach="fog" args={['#000022', 5, 25]} />
     </>
   );
 };
