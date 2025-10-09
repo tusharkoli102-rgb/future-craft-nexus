@@ -157,6 +157,10 @@ All colors MUST be HSL.
     box-shadow: var(--glow-cyber);
   }
 
+  .glow-neon {
+    box-shadow: 0 0 15px hsl(var(--neon-cyan) / 0.6), 0 0 30px hsl(var(--neon-cyan) / 0.3);
+  }
+
   .gradient-text {
     background: var(--gradient-primary);
     -webkit-background-clip: text;
