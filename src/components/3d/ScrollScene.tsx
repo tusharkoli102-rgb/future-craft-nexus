@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import { HumanoidScene } from './HumanoidScene';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -47,14 +46,6 @@ export const ScrollScene = () => {
         <color attach="background" args={['#000011']} />
         <fog attach="fog" args={['#000022', 5, 25]} />
         <HumanoidScene scrollProgress={scrollProgress} />
-        
-        <EffectComposer>
-          <Bloom 
-            intensity={0.5 + scrollProgress * 0.5} 
-            luminanceThreshold={0.2} 
-            luminanceSmoothing={0.9}
-          />
-        </EffectComposer>
       </Canvas>
     </div>
   );

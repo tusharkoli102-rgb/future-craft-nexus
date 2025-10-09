@@ -1,6 +1,6 @@
 import { useRef, useMemo, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Sphere, MeshDistortMaterial, Environment, PerspectiveCamera, Float } from '@react-three/drei';
+import { Sphere, PerspectiveCamera, Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface HumanoidSceneProps {
@@ -100,28 +100,25 @@ export const HumanoidScene = ({ scrollProgress }: HumanoidSceneProps) => {
       <pointLight position={[0, 0, -5]} intensity={0.8} color="#00ffff" />
       <pointLight position={[5, 2, 5]} intensity={0.6} color="#ff00ff" />
 
-      {/* Environment */}
-      <Environment preset="night" />
+      {/* Environment (optional) removed to simplify) */}
 
       {/* Humanoid (using abstract sphere with distortion for demo) */}
       <group ref={humanoidRef}>
         <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
           {/* Head */}
           <Sphere args={[0.5, 64, 64]} position={[0, 1.5, 0]}>
-            <MeshDistortMaterial
+            <meshStandardMaterial
               color="#00ffff"
               emissive="#0088ff"
               emissiveIntensity={scrollProgress > 0.5 ? 0.5 : 0.2}
               metalness={0.9}
               roughness={0.1}
-              distort={0.3}
-              speed={2}
             />
           </Sphere>
 
           {/* Body */}
           <mesh position={[0, 0, 0]}>
-            <capsuleGeometry args={[0.4, 1.5, 32, 64]} />
+            <cylinderGeometry args={[0.4, 0.4, 1.5, 32]} />
             <meshStandardMaterial
               color="#0088ff"
               emissive="#0044ff"
@@ -133,7 +130,7 @@ export const HumanoidScene = ({ scrollProgress }: HumanoidSceneProps) => {
 
           {/* Arms */}
           <mesh position={[-0.6, 0.5, 0]} rotation={[0, 0, Math.PI / 6]}>
-            <capsuleGeometry args={[0.15, 1, 16, 32]} />
+            <cylinderGeometry args={[0.15, 0.15, 1, 16]} />
             <meshStandardMaterial
               color="#0088ff"
               metalness={0.8}
@@ -141,7 +138,7 @@ export const HumanoidScene = ({ scrollProgress }: HumanoidSceneProps) => {
             />
           </mesh>
           <mesh position={[0.6, 0.5, 0]} rotation={[0, 0, -Math.PI / 6]}>
-            <capsuleGeometry args={[0.15, 1, 16, 32]} />
+            <cylinderGeometry args={[0.15, 0.15, 1, 16]} />
             <meshStandardMaterial
               color="#0088ff"
               metalness={0.8}
